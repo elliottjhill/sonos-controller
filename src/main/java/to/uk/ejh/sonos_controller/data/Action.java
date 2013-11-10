@@ -15,7 +15,15 @@ public enum Action {
 						"<Speed>1</Speed>" +
 					"</u:Play>" +
 				"</s:Body>" +
-		"</s:Envelope>", "\"urn:schemas-upnp-org:service:AVTransport:1#Play\"" );
+		"</s:Envelope>", "\"urn:schemas-upnp-org:service:AVTransport:1#Play\"" ),
+	PAUSE("<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
+			"s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">" +
+			"<s:Body>" +
+				"<u:Pause xmlns:u=\"urn:schemas-upnp-org:service:AVTransport:1\">" +
+					"<InstanceID>0</InstanceID>" +
+				"</u:Pause>" +
+			"</s:Body>" +
+		"</s:Envelope>","urn:schemas-upnp-org:service:AVTransport:1#Pause");
 	// The XML required to perform the action
 	private String xml;
 	// The Header "SOAPACTION" value to sent to the SONOS system
