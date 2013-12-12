@@ -7,23 +7,27 @@ package to.uk.ejh.sonos_controller.data;
  *
  */
 public enum Action {
-	PLAY("<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"" +
-				" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">" +
-				"<s:Body>" +
-					"<u:Play xmlns:u=\"urn:schemas-upnp-org:service:AVTransport:1\">" +
-						"<InstanceID>0</InstanceID>" +
-						"<Speed>1</Speed>" +
-					"</u:Play>" +
-				"</s:Body>" +
-		"</s:Envelope>", "\"urn:schemas-upnp-org:service:AVTransport:1#Play\"" ),
-	PAUSE("<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
-			"s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">" +
-			"<s:Body>" +
-				"<u:Pause xmlns:u=\"urn:schemas-upnp-org:service:AVTransport:1\">" +
-					"<InstanceID>0</InstanceID>" +
-				"</u:Pause>" +
-			"</s:Body>" +
-		"</s:Envelope>","urn:schemas-upnp-org:service:AVTransport:1#Pause");
+	
+	PLAY("<u:Play xmlns:u=\"urn:schemas-upnp-org:service:AVTransport:1\">" +
+			"<InstanceID>0</InstanceID>" +
+			"<Speed>1</Speed>" +
+		  "</u:Play>", "\"urn:schemas-upnp-org:service:AVTransport:1#Play\"" ),
+	PAUSE("<u:Pause xmlns:u=\"urn:schemas-upnp-org:service:AVTransport:1\">" +
+			"<InstanceID>0</InstanceID>" +
+			"</u:Pause>", "urn:schemas-upnp-org:service:AVTransport:1#Pause"),
+	NEXT("<u:Next xmlns:u=\"urn:schemas-upnp-org:service:AVTransport:1\">" +
+			"<InstanceID>0</InstanceID>" +
+			"</u:Next>","urn:schemas-upnp-org:service:AVTransport:1#Next"),
+	PREVIOUS("<u:Previous xmlns:u=\"urn:schemas-upnp-org:service:AVTransport:1\">" +
+			"<InstanceID>0</InstanceID>" +
+			"</u:Previous>","urn:schemas-upnp-org:service:AVTransport:1#Previous"),
+	;
+
+	private static String ENVELOPE_START = "<s:Envelope " +
+			"xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"" +
+			" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"> <s:Body>";
+	
+	private static String ENVELOPE_END = "</s:Body></s:Envelope>";
 	// The XML required to perform the action
 	private String xml;
 	// The Header "SOAPACTION" value to sent to the SONOS system
@@ -39,7 +43,7 @@ public enum Action {
 	 * @return
 	 */
 	public String getXml() {
-		return xml;
+		return ENVELOPE_START + xml + ENVELOPE_END;
 	}
 	
 	/**
